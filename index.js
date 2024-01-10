@@ -6,6 +6,10 @@ const { Server } = require('socket.io');
 
 const cors = require('cors');
 
+
+const HealthCheckController = require('./controller/HealthCheckController');
+const ElementController = require('./controller/ElementController');
+
 const corsOptions = {
     origin: '*', // This allows requests from any origin.
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // This allows the specified methods.
@@ -27,9 +31,7 @@ const socketIO = new Server(server, {
     }
 });
 
-const HealthCheckController = require('./controller/HealthCheckController');
-
-const PORT = 3000;
+const PORT = 4000;
 
   
 
@@ -47,6 +49,7 @@ socketIO.on('connection', (socket) => {
 
 
 app.use(`/hc`, HealthCheckController);
+app.use(`/elements`, ElementController);
 
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
