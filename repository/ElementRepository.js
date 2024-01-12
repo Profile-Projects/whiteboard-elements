@@ -17,6 +17,14 @@ class ElementRepository {
         const result = await this.elements.find(query).toArray();
         return result;
     }
+    
+    async updatePosition({ sid, board_sid, position }) {
+        const query = { sid,  board_sid };
+        const element = await this.findById({ sid });
+        const updatedElement = { ...element, position};
+        const result = await this.elements.updateOne(query, updatedElement);
+        return result;
+    }
 };
 
 module.exports = ElementRepository;

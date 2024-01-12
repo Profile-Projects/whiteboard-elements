@@ -9,6 +9,7 @@ const cors = require('cors');
 
 const HealthCheckController = require('./controller/HealthCheckController');
 const ElementController = require('./controller/ElementController');
+const boardEvents = new BoardEvents();
 
 const corsOptions = {
     origin: '*', // This allows requests from any origin.
@@ -45,6 +46,11 @@ socketIO.on('connection', (socket) => {
     socket.on("hello", (params, callbackwiki) => {
         console.log(`Hee nhooo hoooo heax ${JSON.stringify(params)}`);
     })
+
+    socket.on("joinBoard", (params, callback) => {
+        const { board_sid, user_sid } = params;        
+        boardEvents.joinBoard({ user_sid, board_sid, socket });
+    });
 });
 
 

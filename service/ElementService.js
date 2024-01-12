@@ -14,6 +14,8 @@ class ElementService {
         return await this.repo.findByBoardSid({ board_sid });
     }
 
+    
+
 };
 
 module.exports = ElementService;
