@@ -9,6 +9,7 @@ const cors = require('cors');
 
 const HealthCheckController = require('./controller/HealthCheckController');
 const ElementController = require('./controller/ElementController');
+const BoardEvents = require('./service/BoardEvents');
 const boardEvents = new BoardEvents();
 
 const corsOptions = {
@@ -47,9 +48,14 @@ socketIO.on('connection', (socket) => {
         console.log(`Hee nhooo hoooo heax ${JSON.stringify(params)}`);
     })
 
-    socket.on("joinBoard", (params, callback) => {
+    socket.on("join_board", (params, callback) => {
         const { board_sid, user_sid } = params;        
         boardEvents.joinBoard({ user_sid, board_sid, socket });
+    });
+
+    socket.on("add_element", (params) => {
+        const { board_sid, user_sid, position } = params;
+        boardEvents.addElement({ user_sid, board_sid, position, socket });
     });
 });
 

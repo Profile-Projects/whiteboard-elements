@@ -6,6 +6,16 @@ class ElementService {
         this.repo = new ElementRepository();
     }
 
+    async insert({ board_sid, position}) {
+        // TODO : incremental element sid to be added
+        const element = {
+            sid: "BE000002",
+            board_sid,
+            position
+        };
+        return await this.repo.insert({ element });
+    }
+
     async findById({ sid }) {
         return await this.repo.findById({  sid });
     }

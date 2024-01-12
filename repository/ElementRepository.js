@@ -6,6 +6,10 @@ class ElementRepository {
         this.elements = this.db.collection("elements");
     }
 
+    async insert({ element }) {
+        return await this.elements.insertOne(element);
+    }
+
     async findById({ sid }) {
         const query = {  sid };
         const result = await this.elements.findOne({ sid });
