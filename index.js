@@ -53,9 +53,9 @@ socketIO.on('connection', (socket) => {
         boardEvents.joinBoard({ user_sid, board_sid, socket });
     });
 
-    socket.on("add_element", (params) => {
+    socket.on("add_element", (params, callback) => {
         const { board_sid, user_sid, position } = params;
-        boardEvents.addElement({ user_sid, board_sid, position, socket });
+        boardEvents.addElement({ user_sid, board_sid, position, socket }, callback);
     });
 });
 

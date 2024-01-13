@@ -16,6 +16,10 @@ class ElementService {
         return await this.repo.insert({ element });
     }
 
+    async findByObjectId({ _id }) {
+        return await this.repo.findByObjectId({ _id });
+    }
+
     async findById({ sid }) {
         return await this.repo.findById({  sid });
     }

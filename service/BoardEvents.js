@@ -12,12 +12,16 @@ class BoardEvents {
         socket.to(`${board_sid}`, `user joined : ${user_sid}`)
     } 
 
-    async addElement({ user_sid, board_sid, position, socket }) {
+    async addElement({ user_sid, board_sid, position, socket }, callback) {
         const element = await this.elementService.insert({
             board_sid,
             position
         });
-        socket.to(`${board_sid}`).emit(`element_added`, { element });
+
+        const { insertedId:_id } = element;
+        const element_from_db = await this.elementService.findByObjectId({ _id });
+        socket.to(`${board_sid}`).emit(`element_added`, { element_from_db });
+        callback(element_from_db);
     }
 }
 

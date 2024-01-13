@@ -10,6 +10,11 @@ class ElementRepository {
         return await this.elements.insertOne(element);
     }
 
+    async findByObjectId({ _id }) {
+        const qeury = { _id };
+        return await this.elements.findOne(qeury);
+    }
+
     async findById({ sid }) {
         const query = {  sid };
         const result = await this.elements.findOne({ sid });
