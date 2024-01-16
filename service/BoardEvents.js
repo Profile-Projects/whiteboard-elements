@@ -21,6 +21,7 @@ class BoardEvents {
         const { insertedId:_id } = element;
         const element_from_db = await this.elementService.findByObjectId({ _id });
         socket.to(`${board_sid}`).emit(`element_added`, { element_from_db });
+        console.log(`user added a element ${JSON.stringify(element_from_db)}`)
         callback(element_from_db);
     }
 }
